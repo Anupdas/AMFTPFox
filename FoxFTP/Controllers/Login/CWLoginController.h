@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  CWLoginController.h
 //  FoxFTP
 //
 //  Created by Anoop Mohandas on 27/04/16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface CWLoginController : UIViewController
 
 @end
-

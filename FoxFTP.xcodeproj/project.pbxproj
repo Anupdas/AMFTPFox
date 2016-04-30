@@ -7,25 +7,102 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E164ACC1CD5084100AE2AA4 /* CWFTPFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E164ACB1CD5084100AE2AA4 /* CWFTPFile.m */; };
+		6E74EE731CD47F9000C1CA97 /* BRRequest+_UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE601CD47F9000C1CA97 /* BRRequest+_UserData.m */; };
+		6E74EE741CD47F9000C1CA97 /* BRRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE621CD47F9000C1CA97 /* BRRequest.m */; };
+		6E74EE751CD47F9000C1CA97 /* BRRequestCreateDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE641CD47F9000C1CA97 /* BRRequestCreateDirectory.m */; };
+		6E74EE761CD47F9000C1CA97 /* BRRequestDelete.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE661CD47F9000C1CA97 /* BRRequestDelete.m */; };
+		6E74EE771CD47F9000C1CA97 /* BRRequestDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE681CD47F9000C1CA97 /* BRRequestDownload.m */; };
+		6E74EE781CD47F9000C1CA97 /* BRRequestError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE6A1CD47F9000C1CA97 /* BRRequestError.m */; };
+		6E74EE791CD47F9000C1CA97 /* BRRequestListDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE6C1CD47F9000C1CA97 /* BRRequestListDirectory.m */; };
+		6E74EE7A1CD47F9000C1CA97 /* BRRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE6E1CD47F9000C1CA97 /* BRRequestQueue.m */; };
+		6E74EE7B1CD47F9000C1CA97 /* BRRequestUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE701CD47F9000C1CA97 /* BRRequestUpload.m */; };
+		6E74EE7C1CD47F9000C1CA97 /* BRStreamInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE721CD47F9000C1CA97 /* BRStreamInfo.m */; };
+		6E74EE891CD493BB00C1CA97 /* BRRequest+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE881CD493BB00C1CA97 /* BRRequest+Additions.m */; };
 		6E74F5201CD0949500986C58 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74F51F1CD0949500986C58 /* main.m */; };
 		6E74F5231CD0949500986C58 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74F5221CD0949500986C58 /* AppDelegate.m */; };
-		6E74F5261CD0949500986C58 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74F5251CD0949500986C58 /* ViewController.m */; };
 		6E74F5291CD0949500986C58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E74F5271CD0949500986C58 /* Main.storyboard */; };
 		6E74F52B1CD0949500986C58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E74F52A1CD0949500986C58 /* Assets.xcassets */; };
 		6E74F52E1CD0949500986C58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E74F52C1CD0949500986C58 /* LaunchScreen.storyboard */; };
+		6E74F53B1CD0991600986C58 /* CWLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74F53A1CD0991600986C58 /* CWLoginController.m */; };
+		6E74F53E1CD0994500986C58 /* CWHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74F53D1CD0994500986C58 /* CWHomeController.m */; };
+		6E74F5411CD0996C00986C58 /* CWUploadController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74F5401CD0996C00986C58 /* CWUploadController.m */; };
+		6E74F5441CD09A2000986C58 /* CWLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74F5431CD09A2000986C58 /* CWLoginView.m */; };
+		6E74F5491CD0AEA000986C58 /* UIColor+Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74F5481CD0AEA000986C58 /* UIColor+Theme.m */; };
+		6E74F54D1CD0B66600986C58 /* CWFTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74F54C1CD0B66600986C58 /* CWFTPClient.m */; };
+		6E7C62E81CD4F1C400A2C29C /* CWFileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C62E51CD4F1C400A2C29C /* CWFileTableViewCell.m */; };
+		6E7C62E91CD4F1C400A2C29C /* CWFileTableViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C62E61CD4F1C400A2C29C /* CWFileTableViewFooter.m */; };
+		6E7C62ED1CD4F3A900A2C29C /* CWUploadTableViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C62EC1CD4F3A900A2C29C /* CWUploadTableViewFooter.m */; };
+		6E7C62F01CD4F3D000A2C29C /* CWUploadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C62EF1CD4F3D000A2C29C /* CWUploadTableViewCell.m */; };
+		6E7C62F41CD4FBBD00A2C29C /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7C62F31CD4FBBD00A2C29C /* Photos.framework */; };
+		6E938C3F1CD4B83B00EAFB0B /* CWFileTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E938C3E1CD4B83B00EAFB0B /* CWFileTableViewHeader.m */; };
+		6E938C421CD4C6D900EAFB0B /* CWFTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E938C411CD4C6D900EAFB0B /* CWFTPOperation.m */; };
+		C5398A5B6F32200BA03D2D09 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6053E23F5C33DC0C1F349AA5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F59892CB06FEE7D26A7E9E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6053E23F5C33DC0C1F349AA5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E164ACA1CD5084100AE2AA4 /* CWFTPFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWFTPFile.h; path = FTPClient/CWFTPFile.h; sourceTree = "<group>"; };
+		6E164ACB1CD5084100AE2AA4 /* CWFTPFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWFTPFile.m; path = FTPClient/CWFTPFile.m; sourceTree = "<group>"; };
+		6E74EE5E1CD47F9000C1CA97 /* BRGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRGlobal.h; sourceTree = "<group>"; };
+		6E74EE5F1CD47F9000C1CA97 /* BRRequest+_UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BRRequest+_UserData.h"; sourceTree = "<group>"; };
+		6E74EE601CD47F9000C1CA97 /* BRRequest+_UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BRRequest+_UserData.m"; sourceTree = "<group>"; };
+		6E74EE611CD47F9000C1CA97 /* BRRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRRequest.h; sourceTree = "<group>"; };
+		6E74EE621CD47F9000C1CA97 /* BRRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRRequest.m; sourceTree = "<group>"; };
+		6E74EE631CD47F9000C1CA97 /* BRRequestCreateDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRRequestCreateDirectory.h; sourceTree = "<group>"; };
+		6E74EE641CD47F9000C1CA97 /* BRRequestCreateDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRRequestCreateDirectory.m; sourceTree = "<group>"; };
+		6E74EE651CD47F9000C1CA97 /* BRRequestDelete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRRequestDelete.h; sourceTree = "<group>"; };
+		6E74EE661CD47F9000C1CA97 /* BRRequestDelete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRRequestDelete.m; sourceTree = "<group>"; };
+		6E74EE671CD47F9000C1CA97 /* BRRequestDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRRequestDownload.h; sourceTree = "<group>"; };
+		6E74EE681CD47F9000C1CA97 /* BRRequestDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRRequestDownload.m; sourceTree = "<group>"; };
+		6E74EE691CD47F9000C1CA97 /* BRRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRRequestError.h; sourceTree = "<group>"; };
+		6E74EE6A1CD47F9000C1CA97 /* BRRequestError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRRequestError.m; sourceTree = "<group>"; };
+		6E74EE6B1CD47F9000C1CA97 /* BRRequestListDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRRequestListDirectory.h; sourceTree = "<group>"; };
+		6E74EE6C1CD47F9000C1CA97 /* BRRequestListDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRRequestListDirectory.m; sourceTree = "<group>"; };
+		6E74EE6D1CD47F9000C1CA97 /* BRRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRRequestQueue.h; sourceTree = "<group>"; };
+		6E74EE6E1CD47F9000C1CA97 /* BRRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRRequestQueue.m; sourceTree = "<group>"; };
+		6E74EE6F1CD47F9000C1CA97 /* BRRequestUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRRequestUpload.h; sourceTree = "<group>"; };
+		6E74EE701CD47F9000C1CA97 /* BRRequestUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRRequestUpload.m; sourceTree = "<group>"; };
+		6E74EE711CD47F9000C1CA97 /* BRStreamInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRStreamInfo.h; sourceTree = "<group>"; };
+		6E74EE721CD47F9000C1CA97 /* BRStreamInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRStreamInfo.m; sourceTree = "<group>"; };
+		6E74EE871CD493BB00C1CA97 /* BRRequest+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BRRequest+Additions.h"; path = "FTPClient/BRRequest+Additions.h"; sourceTree = "<group>"; };
+		6E74EE881CD493BB00C1CA97 /* BRRequest+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "BRRequest+Additions.m"; path = "FTPClient/BRRequest+Additions.m"; sourceTree = "<group>"; };
 		6E74F51B1CD0949500986C58 /* FoxFTP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoxFTP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E74F51F1CD0949500986C58 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6E74F5211CD0949500986C58 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6E74F5221CD0949500986C58 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6E74F5241CD0949500986C58 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6E74F5251CD0949500986C58 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6E74F5281CD0949500986C58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6E74F52A1CD0949500986C58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E74F52D1CD0949500986C58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E74F52F1CD0949500986C58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E74F5391CD0991600986C58 /* CWLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWLoginController.h; path = Controllers/Login/CWLoginController.h; sourceTree = "<group>"; };
+		6E74F53A1CD0991600986C58 /* CWLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWLoginController.m; path = Controllers/Login/CWLoginController.m; sourceTree = "<group>"; };
+		6E74F53C1CD0994500986C58 /* CWHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWHomeController.h; path = Controllers/Home/CWHomeController.h; sourceTree = "<group>"; };
+		6E74F53D1CD0994500986C58 /* CWHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWHomeController.m; path = Controllers/Home/CWHomeController.m; sourceTree = "<group>"; };
+		6E74F53F1CD0996C00986C58 /* CWUploadController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWUploadController.h; path = Controllers/Upload/CWUploadController.h; sourceTree = "<group>"; };
+		6E74F5401CD0996C00986C58 /* CWUploadController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWUploadController.m; path = Controllers/Upload/CWUploadController.m; sourceTree = "<group>"; };
+		6E74F5421CD09A2000986C58 /* CWLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWLoginView.h; path = Controllers/Login/View/CWLoginView.h; sourceTree = "<group>"; };
+		6E74F5431CD09A2000986C58 /* CWLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWLoginView.m; path = Controllers/Login/View/CWLoginView.m; sourceTree = "<group>"; };
+		6E74F5451CD09CFF00986C58 /* FoxFTP-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FoxFTP-Prefix.pch"; sourceTree = "<group>"; };
+		6E74F5471CD0AEA000986C58 /* UIColor+Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Theme.h"; path = "Categories/UIColor+Theme.h"; sourceTree = "<group>"; };
+		6E74F5481CD0AEA000986C58 /* UIColor+Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Theme.m"; path = "Categories/UIColor+Theme.m"; sourceTree = "<group>"; };
+		6E74F54B1CD0B66600986C58 /* CWFTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWFTPClient.h; path = FTPClient/CWFTPClient.h; sourceTree = "<group>"; };
+		6E74F54C1CD0B66600986C58 /* CWFTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWFTPClient.m; path = FTPClient/CWFTPClient.m; sourceTree = "<group>"; };
+		6E7C62E41CD4F1C400A2C29C /* CWFileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWFileTableViewCell.h; path = Controllers/Home/TableView/CWFileTableViewCell.h; sourceTree = "<group>"; };
+		6E7C62E51CD4F1C400A2C29C /* CWFileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWFileTableViewCell.m; path = Controllers/Home/TableView/CWFileTableViewCell.m; sourceTree = "<group>"; };
+		6E7C62E61CD4F1C400A2C29C /* CWFileTableViewFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWFileTableViewFooter.m; path = Controllers/Home/TableView/CWFileTableViewFooter.m; sourceTree = "<group>"; };
+		6E7C62E71CD4F1C400A2C29C /* CWFileTableViewFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWFileTableViewFooter.h; path = Controllers/Home/TableView/CWFileTableViewFooter.h; sourceTree = "<group>"; };
+		6E7C62EB1CD4F3A900A2C29C /* CWUploadTableViewFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWUploadTableViewFooter.h; sourceTree = "<group>"; };
+		6E7C62EC1CD4F3A900A2C29C /* CWUploadTableViewFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWUploadTableViewFooter.m; sourceTree = "<group>"; };
+		6E7C62EE1CD4F3D000A2C29C /* CWUploadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWUploadTableViewCell.h; sourceTree = "<group>"; };
+		6E7C62EF1CD4F3D000A2C29C /* CWUploadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWUploadTableViewCell.m; sourceTree = "<group>"; };
+		6E7C62F31CD4FBBD00A2C29C /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		6E938C3D1CD4B83B00EAFB0B /* CWFileTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWFileTableViewHeader.h; path = Controllers/Home/TableView/CWFileTableViewHeader.h; sourceTree = "<group>"; };
+		6E938C3E1CD4B83B00EAFB0B /* CWFileTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWFileTableViewHeader.m; path = Controllers/Home/TableView/CWFileTableViewHeader.m; sourceTree = "<group>"; };
+		6E938C401CD4C6D900EAFB0B /* CWFTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWFTPOperation.h; path = FTPClient/CWFTPOperation.h; sourceTree = "<group>"; };
+		6E938C411CD4C6D900EAFB0B /* CWFTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWFTPOperation.m; path = FTPClient/CWFTPOperation.m; sourceTree = "<group>"; };
+		EE25E13D344E9660CC8C1874 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +110,57 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E7C62F41CD4FBBD00A2C29C /* Photos.framework in Frameworks */,
+				C5398A5B6F32200BA03D2D09 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E74EE5C1CD47F9000C1CA97 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				6E74EE5D1CD47F9000C1CA97 /* BlackRaccoon */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		6E74EE5D1CD47F9000C1CA97 /* BlackRaccoon */ = {
+			isa = PBXGroup;
+			children = (
+				6E74EE5E1CD47F9000C1CA97 /* BRGlobal.h */,
+				6E74EE5F1CD47F9000C1CA97 /* BRRequest+_UserData.h */,
+				6E74EE601CD47F9000C1CA97 /* BRRequest+_UserData.m */,
+				6E74EE611CD47F9000C1CA97 /* BRRequest.h */,
+				6E74EE621CD47F9000C1CA97 /* BRRequest.m */,
+				6E74EE631CD47F9000C1CA97 /* BRRequestCreateDirectory.h */,
+				6E74EE641CD47F9000C1CA97 /* BRRequestCreateDirectory.m */,
+				6E74EE651CD47F9000C1CA97 /* BRRequestDelete.h */,
+				6E74EE661CD47F9000C1CA97 /* BRRequestDelete.m */,
+				6E74EE671CD47F9000C1CA97 /* BRRequestDownload.h */,
+				6E74EE681CD47F9000C1CA97 /* BRRequestDownload.m */,
+				6E74EE691CD47F9000C1CA97 /* BRRequestError.h */,
+				6E74EE6A1CD47F9000C1CA97 /* BRRequestError.m */,
+				6E74EE6B1CD47F9000C1CA97 /* BRRequestListDirectory.h */,
+				6E74EE6C1CD47F9000C1CA97 /* BRRequestListDirectory.m */,
+				6E74EE6D1CD47F9000C1CA97 /* BRRequestQueue.h */,
+				6E74EE6E1CD47F9000C1CA97 /* BRRequestQueue.m */,
+				6E74EE6F1CD47F9000C1CA97 /* BRRequestUpload.h */,
+				6E74EE701CD47F9000C1CA97 /* BRRequestUpload.m */,
+				6E74EE711CD47F9000C1CA97 /* BRStreamInfo.h */,
+				6E74EE721CD47F9000C1CA97 /* BRStreamInfo.m */,
+			);
+			path = BlackRaccoon;
+			sourceTree = "<group>";
+		};
 		6E74F5121CD0949500986C58 = {
 			isa = PBXGroup;
 			children = (
 				6E74F51D1CD0949500986C58 /* FoxFTP */,
 				6E74F51C1CD0949500986C58 /* Products */,
+				C31CA5B713D193249612C665 /* Pods */,
+				EF6AF9E505E70F94207FEA9A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,10 +175,12 @@
 		6E74F51D1CD0949500986C58 /* FoxFTP */ = {
 			isa = PBXGroup;
 			children = (
+				6E74F54A1CD0B60D00986C58 /* FTPClient */,
+				6E74F5461CD0AE7900986C58 /* Categories */,
+				6E74F5351CD0957700986C58 /* Controllers */,
+				6E74EE5C1CD47F9000C1CA97 /* Libraries */,
 				6E74F5211CD0949500986C58 /* AppDelegate.h */,
 				6E74F5221CD0949500986C58 /* AppDelegate.m */,
-				6E74F5241CD0949500986C58 /* ViewController.h */,
-				6E74F5251CD0949500986C58 /* ViewController.m */,
 				6E74F5271CD0949500986C58 /* Main.storyboard */,
 				6E74F52A1CD0949500986C58 /* Assets.xcassets */,
 				6E74F52C1CD0949500986C58 /* LaunchScreen.storyboard */,
@@ -75,8 +194,117 @@
 			isa = PBXGroup;
 			children = (
 				6E74F51F1CD0949500986C58 /* main.m */,
+				6E74F5451CD09CFF00986C58 /* FoxFTP-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E74F5351CD0957700986C58 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6E74F5381CD0959F00986C58 /* Upload */,
+				6E74F5371CD0959600986C58 /* Home */,
+				6E74F5361CD0958E00986C58 /* Login */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		6E74F5361CD0958E00986C58 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				6E74F5391CD0991600986C58 /* CWLoginController.h */,
+				6E74F53A1CD0991600986C58 /* CWLoginController.m */,
+				6E74F5421CD09A2000986C58 /* CWLoginView.h */,
+				6E74F5431CD09A2000986C58 /* CWLoginView.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		6E74F5371CD0959600986C58 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6E938C3C1CD4B54400EAFB0B /* TableView */,
+				6E74F53C1CD0994500986C58 /* CWHomeController.h */,
+				6E74F53D1CD0994500986C58 /* CWHomeController.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		6E74F5381CD0959F00986C58 /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				6E7C62EA1CD4F37F00A2C29C /* TableView */,
+				6E74F53F1CD0996C00986C58 /* CWUploadController.h */,
+				6E74F5401CD0996C00986C58 /* CWUploadController.m */,
+			);
+			name = Upload;
+			sourceTree = "<group>";
+		};
+		6E74F5461CD0AE7900986C58 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6E74F5471CD0AEA000986C58 /* UIColor+Theme.h */,
+				6E74F5481CD0AEA000986C58 /* UIColor+Theme.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		6E74F54A1CD0B60D00986C58 /* FTPClient */ = {
+			isa = PBXGroup;
+			children = (
+				6E74F54B1CD0B66600986C58 /* CWFTPClient.h */,
+				6E74F54C1CD0B66600986C58 /* CWFTPClient.m */,
+				6E74EE871CD493BB00C1CA97 /* BRRequest+Additions.h */,
+				6E74EE881CD493BB00C1CA97 /* BRRequest+Additions.m */,
+				6E938C401CD4C6D900EAFB0B /* CWFTPOperation.h */,
+				6E938C411CD4C6D900EAFB0B /* CWFTPOperation.m */,
+				6E164ACA1CD5084100AE2AA4 /* CWFTPFile.h */,
+				6E164ACB1CD5084100AE2AA4 /* CWFTPFile.m */,
+			);
+			name = FTPClient;
+			sourceTree = "<group>";
+		};
+		6E7C62EA1CD4F37F00A2C29C /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				6E7C62EE1CD4F3D000A2C29C /* CWUploadTableViewCell.h */,
+				6E7C62EF1CD4F3D000A2C29C /* CWUploadTableViewCell.m */,
+				6E7C62EB1CD4F3A900A2C29C /* CWUploadTableViewFooter.h */,
+				6E7C62EC1CD4F3A900A2C29C /* CWUploadTableViewFooter.m */,
+			);
+			name = TableView;
+			path = Controllers/Upload/TableView;
+			sourceTree = "<group>";
+		};
+		6E938C3C1CD4B54400EAFB0B /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				6E7C62E41CD4F1C400A2C29C /* CWFileTableViewCell.h */,
+				6E7C62E51CD4F1C400A2C29C /* CWFileTableViewCell.m */,
+				6E938C3D1CD4B83B00EAFB0B /* CWFileTableViewHeader.h */,
+				6E938C3E1CD4B83B00EAFB0B /* CWFileTableViewHeader.m */,
+				6E7C62E71CD4F1C400A2C29C /* CWFileTableViewFooter.h */,
+				6E7C62E61CD4F1C400A2C29C /* CWFileTableViewFooter.m */,
+			);
+			name = TableView;
+			sourceTree = "<group>";
+		};
+		C31CA5B713D193249612C665 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1F59892CB06FEE7D26A7E9E7 /* Pods.debug.xcconfig */,
+				EE25E13D344E9660CC8C1874 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EF6AF9E505E70F94207FEA9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E7C62F31CD4FBBD00A2C29C /* Photos.framework */,
+				6053E23F5C33DC0C1F349AA5 /* libPods.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,9 +314,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E74F5321CD0949500986C58 /* Build configuration list for PBXNativeTarget "FoxFTP" */;
 			buildPhases = (
+				D120F3201AB124011616BCAC /* Check Pods Manifest.lock */,
 				6E74F5171CD0949500986C58 /* Sources */,
 				6E74F5181CD0949500986C58 /* Frameworks */,
 				6E74F5191CD0949500986C58 /* Resources */,
+				43D299625110333B00FCB4D7 /* Embed Pods Frameworks */,
+				601811DBBB4C3BBCA5512738 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -144,14 +375,85 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		43D299625110333B00FCB4D7 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		601811DBBB4C3BBCA5512738 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D120F3201AB124011616BCAC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6E74F5171CD0949500986C58 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E74F5261CD0949500986C58 /* ViewController.m in Sources */,
+				6E164ACC1CD5084100AE2AA4 /* CWFTPFile.m in Sources */,
+				6E74F5441CD09A2000986C58 /* CWLoginView.m in Sources */,
+				6E74EE791CD47F9000C1CA97 /* BRRequestListDirectory.m in Sources */,
+				6E74EE761CD47F9000C1CA97 /* BRRequestDelete.m in Sources */,
+				6E7C62E81CD4F1C400A2C29C /* CWFileTableViewCell.m in Sources */,
+				6E74F54D1CD0B66600986C58 /* CWFTPClient.m in Sources */,
+				6E74EE741CD47F9000C1CA97 /* BRRequest.m in Sources */,
+				6E74EE7C1CD47F9000C1CA97 /* BRStreamInfo.m in Sources */,
+				6E74F53E1CD0994500986C58 /* CWHomeController.m in Sources */,
+				6E74EE7B1CD47F9000C1CA97 /* BRRequestUpload.m in Sources */,
+				6E74EE781CD47F9000C1CA97 /* BRRequestError.m in Sources */,
+				6E74EE731CD47F9000C1CA97 /* BRRequest+_UserData.m in Sources */,
+				6E7C62E91CD4F1C400A2C29C /* CWFileTableViewFooter.m in Sources */,
+				6E74F5411CD0996C00986C58 /* CWUploadController.m in Sources */,
+				6E74F53B1CD0991600986C58 /* CWLoginController.m in Sources */,
+				6E74EE7A1CD47F9000C1CA97 /* BRRequestQueue.m in Sources */,
+				6E74F5491CD0AEA000986C58 /* UIColor+Theme.m in Sources */,
 				6E74F5231CD0949500986C58 /* AppDelegate.m in Sources */,
+				6E938C3F1CD4B83B00EAFB0B /* CWFileTableViewHeader.m in Sources */,
+				6E74EE771CD47F9000C1CA97 /* BRRequestDownload.m in Sources */,
 				6E74F5201CD0949500986C58 /* main.m in Sources */,
+				6E938C421CD4C6D900EAFB0B /* CWFTPOperation.m in Sources */,
+				6E7C62ED1CD4F3A900A2C29C /* CWUploadTableViewFooter.m in Sources */,
+				6E7C62F01CD4F3D000A2C29C /* CWUploadTableViewCell.m in Sources */,
+				6E74EE891CD493BB00C1CA97 /* BRRequest+Additions.m in Sources */,
+				6E74EE751CD47F9000C1CA97 /* BRRequestCreateDirectory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,9 +565,14 @@
 		};
 		6E74F5331CD0949500986C58 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F59892CB06FEE7D26A7E9E7 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FoxFTP/FoxFTP-Prefix.pch";
 				INFOPLIST_FILE = FoxFTP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Cyware.FoxFTP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -274,9 +581,14 @@
 		};
 		6E74F5341CD0949500986C58 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE25E13D344E9660CC8C1874 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FoxFTP/FoxFTP-Prefix.pch";
 				INFOPLIST_FILE = FoxFTP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Cyware.FoxFTP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -302,6 +614,7 @@
 				6E74F5341CD0949500986C58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

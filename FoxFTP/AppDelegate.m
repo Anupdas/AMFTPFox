@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "CWLoginController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    CWLoginController *controller = [CWLoginController new];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [navController setNavigationBarHidden:YES animated:NO];
+    self.window.rootViewController = navController;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

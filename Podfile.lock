@@ -1,0 +1,20 @@
+PODS:
+  - CTAssetsPickerController (3.3.1):
+    - PureLayout (~> 3.0.0)
+  - KVOController (1.1.0)
+  - PureLayout (3.0.1)
+  - SVProgressHUD (2.0.3)
+
+DEPENDENCIES:
+  - CTAssetsPickerController
+  - KVOController
+  - PureLayout
+  - SVProgressHUD
+
+SPEC CHECKSUMS:
+  CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
+  KVOController: 321b5fc59300fcaabd42c0f679baa7a27efbb2fd
+  PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
+
+COCOAPODS: 0.39.0

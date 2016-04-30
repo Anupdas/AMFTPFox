@@ -1,0 +1,18 @@
+//
+//  FoxFTP-Prefix.pch
+//  FoxFTP
+//
+//  Created by Anoop Mohandas on 27/04/16.
+//  Copyright © 2016 Anoop Mohandas. All rights reserved.
+//
+
+#ifndef FoxFTP_Prefix_pch
+#define FoxFTP_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <PureLayout/PureLayout.h>
+#import "UIColor+Theme.h"
+
+#endif /* FoxFTP_Prefix_pch */
