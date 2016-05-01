@@ -88,10 +88,14 @@ NSString *const CWFTPRootDirectory = @"/";
 
 #pragma mark - Public Methods
 
-- (BOOL)fileExistsAtDirectory:(NSString *)remotePath{
+- (CWFTPFile *)fileForResourceName:(NSString *)resourceName{
     NSArray *files = [self.fileCache objectForKey:self.rootDirectory];
     return [files findFirstByAttribute:@"resourceName"
-                             withValue:remotePath]?YES:NO;
+                             withValue:resourceName];
+}
+
+- (BOOL)fileExistsAtDirectory:(NSString *)resourceName{
+    return [self fileForResourceName:resourceName]?YES:NO;
 }
 
 - (BOOL)localFileExistsAtPath:(NSString *)resourceName{
@@ -152,6 +156,18 @@ NSString *const CWFTPRootDirectory = @"/";
             return tempFileName;
         }
     } return nil;
+}
+
+- (BOOL)removeLocalFileAtPath:(NSString *)resourceName{
+    id obj = [self fileForResourceName:resourceName];
+    if (obj) {
+        [self willChangeValueForKey:@"fileCount"];
+        NSMutableArray *files = [self.fileCache objectForKey:self.rootDirectory];
+        [files removeObject:obj];
+        self.fileCount = files.count;
+        [self didChangeValueForKey:@"fileCount"];
+        return YES;
+    } return NO;
 }
 
 - (NSString *)remotePathFromResourceName:(NSString *)resourceName{

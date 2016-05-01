@@ -32,6 +32,11 @@
 }
 
 - (void)setFtpFile:(CWFTPFile *)ftpFile{
-    self.userDictionary[@"CWFTPFile"] = ftpFile;
+    if (ftpFile) {
+        self.userDictionary[@"CWFTPFile"] = ftpFile;
+    }else{
+        [self.userDictionary removeObjectForKey:@"CWFTPFile"];
+    }
+    
 }
 @end

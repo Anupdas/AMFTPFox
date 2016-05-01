@@ -30,6 +30,12 @@
                                    action:@selector(loginButtonClick:)
                          forControlEvents:UIControlEventTouchUpInside];
         
+        if (TARGET_IPHONE_SIMULATOR) {
+            _loginView.hostTextField.text     = @"52.26.67.76";
+            _loginView.usernameTextField.text = @"eauusers";
+            _loginView.passwordTextField.text = @"YTNhOTNmYTAwOTljYmFmMDlhMTJlODVl";
+        }
+        
     }return _loginView;
 }
 
@@ -64,10 +70,6 @@
         self.loginView.hostTextField.text = self.ftpClient.credential.host;
         [self signUserIn];
     }
-    
-    self.loginView.hostTextField.text     = @"52.26.67.76";
-    self.loginView.usernameTextField.text = @"eauusers";
-    self.loginView.passwordTextField.text = @"YTNhOTNmYTAwOTljYmFmMDlhMTJlODVl";
 }
 
 - (void)didReceiveMemoryWarning {

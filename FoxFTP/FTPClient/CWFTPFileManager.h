@@ -113,6 +113,15 @@
           resourceName:(NSString *)resourceName;
 
 /**
+ *  Remove file with resource name
+ *
+ *  @param resourceName Name of resource
+ *
+ *  @return YES if success
+ */
+- (BOOL)removeLocalFileAtPath:(NSString *)resourceName;
+
+/**
  *  Find the full remote path
  *
  *  @param resourceName Name of the resource

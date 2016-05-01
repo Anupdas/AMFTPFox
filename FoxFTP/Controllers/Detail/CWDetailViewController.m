@@ -46,7 +46,11 @@
     self.title = self.file.resourceName;
     
     [self fetchResourceIfRequired];
-    
+}
+
+- (void)addDeleteButton{
+    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteFileButtonClick:)];
+    self.navigationItem.rightBarButtonItem = deleteButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -60,6 +64,24 @@
     [SVProgressHUD dismiss];
     [self.ftpClient cancelDownloadRequest];
 }
+
+#pragma mark - Button Click
+
+- (void)deleteFileButtonClick:(id)sender{
+    [SVProgressHUD showWithStatus:@"Please wait..."];
+    __weak CWDetailViewController *weakSelf = self;
+    [self.ftpClient deleteFile:self.file
+                    completion:^(id response, NSError *error) {
+                        if (!error) {
+                            [SVProgressHUD dismiss];
+                            [weakSelf.navigationController popViewControllerAnimated:YES];
+                        }else{
+                            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+                        }
+    }];
+}
+
+#pragma mark
 
 - (void)fetchResourceIfRequired{
     if ([self.ftpClient.fileManager localFileExistsAtPath:self.file.resourceName]) {
@@ -83,6 +105,8 @@
 - (void)loadResource{
     NSURL *fileURL = [self.ftpClient.fileManager localFileURLForResourceName:self.file.resourceName];
     [self.webView loadRequest:[NSURLRequest requestWithURL:fileURL]];
+    
+    [self addDeleteButton];
 }
 
 

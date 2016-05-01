@@ -11,14 +11,11 @@
 #import "BRRequestDownload.h"
 #import "BRRequestUpload.h"
 #import "BRRequestCreateDirectory.h"
+#import "BRRequestDelete.h"
 #import "BRRequest+_UserData.h"
 #import "BRRequest+Additions.h"
 #import "CWFTPOperation.h"
 #import "CWFTPFile.h"
-
-NSString *const CWFTPRequestProgressChanged = @"CWFTPRequestProgressChanged";
-NSString *const CWFTPRequestSuccessful = @"CWFTPRequestSuccessful";
-NSString *const CWFTPRequestFailure = @"CWFTPRequestFailure";
 
 NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
 
@@ -38,6 +35,8 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
 
 @property (nonatomic, assign, readwrite) NSUInteger uploadCount;
 @property (nonatomic, assign, readwrite) float uploadProgress;
+
+@property (nonatomic, copy) CWFTPCompletionBlock deleteCompletionBlock;
 
 @property (nonatomic, strong) NSMutableArray *ftpRequests;
 @property (nonatomic, strong) NSMutableArray *uploadFiles;
@@ -271,8 +270,22 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
     }
 }
 
-- (void)deleteFileAtPath:(NSString *)remotePath{
-
+- (void)deleteFile:(CWFTPFile *)file
+        completion:(CWFTPCompletionBlock)block{
+    self.deleteCompletionBlock = block;
+    //Delete Request blocks the main thread hence a concurrent queue is used to free UI
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        BRRequestDelete *request = [[BRRequestDelete alloc] initWithDelegate:self];
+        request.hostname = self.host;
+        request.path = [self.fileManager.rootDirectory stringByAppendingPathComponent:file.resourceName];
+        request.username = self.username;
+        request.password = self.password;
+        request.tag = 0;
+        request.requestType = kBRDeleteRequest;
+        request.ftpFile = file;
+        
+        [request start];
+    });
 }
 
 #pragma mark - Request Delegates
@@ -307,10 +320,6 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
             break;
     }
     
-    [self postData:@{@"fileID":@(request.tag),
-                     @"requestType":@(request.requestType),
-                     @"progress":@(request.percentCompleted)}
-          forEvent:CWFTPRequestProgressChanged];
 }
 
 - (void)requestCompleted:(BRRequest *)request{
@@ -348,6 +357,17 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
             self.downloadData = nil;
             break;
         }
+        case kBRDeleteRequest:{
+            [self.fileManager removeLocalFileAtPath:request.ftpFile.resourceName];
+            //ftp file is cleared so that upload files are not affected
+            request.ftpFile = nil;
+            if (self.deleteCompletionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.deleteCompletionBlock(request.path,nil);
+                });
+            }
+            break;
+        }
         default:
             break;
     }
@@ -377,9 +397,20 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
                                                      code:400
                                                  userInfo:@{NSLocalizedDescriptionKey:@"Unable to download file. Please check the internet connection and retry."}];
                 self.downloadCompletionBlock(nil,error);
-            }
+            }break;
         }
-            
+        case kBRDeleteRequest:{
+            request.ftpFile = nil;
+            if (self.deleteCompletionBlock) {
+                NSError *error = [NSError errorWithDomain:@"com.FTPFOX.Error"
+                                                     code:400
+                                                 userInfo:@{NSLocalizedDescriptionKey:@"Unable to delete file. Please check the internet connection and retry."}];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.deleteCompletionBlock(nil,error);
+                });
+            }
+            break;
+        }
         default:
             break;
     }

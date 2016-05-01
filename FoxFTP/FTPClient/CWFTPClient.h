@@ -11,10 +11,6 @@
 #import "CWFTPFileManager.h"
 @class CWFTPFile;
 
-extern NSString *const CWFTPRequestProgressChanged;
-extern NSString *const CWFTPRequestSuccessful;
-extern NSString *const CWFTPRequestFailure;
-
 typedef void(^CWFTPCompletionBlock)(id response, NSError *error);
 typedef void(^CWFTPProgressBlock)(float percentage);
 
@@ -115,12 +111,13 @@ typedef void(^CWFTPProgressBlock)(float percentage);
 - (void)cancelUploadFile:(CWFTPFile *)file;
 
 /**
- *  Delete a file at specified remote path.
+ *  Delete FTP File
  *
- *  @param remotePath The path to the remote resource to delete.
- *
+ *  @param file  FTPFile Instance
+ *  @param block Completion block.Succesful if no error is given back.
  */
-- (void)deleteFileAtPath:(NSString *)remotePath;
+- (void)deleteFile:(CWFTPFile *)file
+        completion:(CWFTPCompletionBlock)block;
 
 
 @end
