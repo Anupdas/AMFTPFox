@@ -32,6 +32,7 @@
 - (UIWebView *)webView{
     if (!_webView) {
         _webView = [UIWebView newAutoLayoutView];
+        _webView.scalesPageToFit = YES;
     }return _webView;
 }
 
