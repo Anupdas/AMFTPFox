@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UILabel *passwordLabel;
 @property (nonatomic, strong) UILabel *saveLabel;
 
+@property (nonatomic, weak) UITextField *currentTextField;
+@property (nonatomic, assign) CGFloat keyboardHeight;
 @property (nonatomic, strong) NSLayoutConstraint *verticalConstraint;
 @property (nonatomic, assign) BOOL didLayoutConstraints;
 
@@ -39,6 +41,8 @@
         [self.contentView addSubview:self.usernameLabel];
         [self.contentView addSubview:self.passwordLabel];
         [self.contentView addSubview:self.saveLabel];
+        
+        [self addKeyboardObservers];
 
     }return self;
 }
@@ -46,7 +50,9 @@
 - (void)updateConstraints{
     if (!self.didLayoutConstraints) {
         
-        [self.contentView autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self withOffset:-30.0f];
+        self.verticalConstraint =[self.contentView autoAlignAxis:ALAxisHorizontal
+                                                toSameAxisOfView:self
+                                                      withOffset:-30.0f];
         [self.contentView autoAlignAxisToSuperviewAxis:ALAxisVertical];
         
         NSDictionary *metrics = @{@"hPin":@20,@"vPin":@15};
@@ -113,12 +119,16 @@
         _hostTextField.autocorrectionType = UITextAutocorrectionTypeNo;
         _hostTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _hostTextField.placeholder = @"Server URL or IP";
+        _hostTextField.returnKeyType = UIReturnKeyNext;
         [_hostTextField addTarget:self
                              action:@selector(returnButtonClick:)
                    forControlEvents:UIControlEventEditingDidEndOnExit];
         [_hostTextField addTarget:self
                                action:@selector(textFieldEditingChanged:)
                      forControlEvents:UIControlEventEditingChanged];
+        [_hostTextField addTarget:self
+                               action:@selector(textFieldDidBeginEditing:)
+                     forControlEvents:UIControlEventEditingDidBegin];
     }return _hostTextField;
 }
 
@@ -137,12 +147,16 @@
         _usernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
         _usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _usernameTextField.placeholder = @"Enter Username";
+        _usernameTextField.returnKeyType = UIReturnKeyNext;
         [_usernameTextField addTarget:self
                                action:@selector(returnButtonClick:)
                      forControlEvents:UIControlEventEditingDidEndOnExit];
         [_usernameTextField addTarget:self
                                action:@selector(textFieldEditingChanged:)
                      forControlEvents:UIControlEventEditingChanged];
+        [_usernameTextField addTarget:self
+                               action:@selector(textFieldDidBeginEditing:)
+                     forControlEvents:UIControlEventEditingDidBegin];
     }return _usernameTextField;
 }
 
@@ -167,6 +181,10 @@
         [_passwordTextField addTarget:self
                                action:@selector(textFieldEditingChanged:)
                      forControlEvents:UIControlEventEditingChanged];
+        
+        [_passwordTextField addTarget:self
+                               action:@selector(textFieldDidBeginEditing:)
+                     forControlEvents:UIControlEventEditingDidBegin];
     }return _passwordTextField;
 }
 
@@ -204,14 +222,55 @@
 #pragma mark - 
 
 - (void)returnButtonClick:(UITextField *)textField{
-    [textField resignFirstResponder];
+    if (self.hostTextField == textField) {
+        [self.usernameTextField becomeFirstResponder];
+    }else if(self.usernameTextField == textField){
+        [self.passwordTextField becomeFirstResponder];
+    }else{
+        [textField resignFirstResponder];
+    }
 }
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    self.currentTextField = textField;
+    if (self.keyboardHeight > 0) {
+        [self scrollTextFieldToVisible:textField];
+    }
+}
+
+- (void)scrollTextFieldToVisible:(UITextField *)textField{
+    
+    CGPoint point = [textField convertPoint:textField.center
+                                     toView:self];
+    
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    screenSize.size.height -= self.keyboardHeight;
+    if(!CGRectContainsPoint(screenSize, point)){
+        self.verticalConstraint.constant = (point.y - screenSize.size.height)*-1;
+    }
+}
+
 
 - (void)textFieldEditingChanged:(UITextField *)textField{
     self.loginButton.enabled = [self validate:NULL];
 }
 
 #pragma mark - Keyboard 
+
+- (void)addKeyboardObservers{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification{
+    self.keyboardHeight = [notification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height-88;
+    [self scrollTextFieldToVisible:self.currentTextField];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification{
+    self.keyboardHeight = 0.0f;
+    self.verticalConstraint.constant = -30.0f;
+}
 
 #pragma mark - Validation
 

@@ -25,6 +25,7 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
 @interface CWFTPClient ()<BRRequestDelegate>
 
 @property (nonatomic, strong, readwrite) CWFTPCredential *credential;
+@property (nonatomic, assign) BOOL shouldSaveCredential;
 
 @property (nonatomic, copy) CWFTPCompletionBlock signInCompletionBlock;
 
@@ -94,12 +95,9 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
                     save:(BOOL)shouldSave{
 
     _credential = credential;
-    _fileManager = [[CWFTPFileManager alloc] initWithHost:credential.host username:credential.username];
-    
-    if (shouldSave) {
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:credential];
-        [[NSUserDefaults standardUserDefaults] setObject:data forKey:kCWFTPClientSavedUser];
-    }
+    _fileManager = [[CWFTPFileManager alloc] initWithHost:credential.host
+                                                 username:credential.username];
+    _shouldSaveCredential = shouldSave;
 }
 
 - (void)logOutUser{
@@ -286,6 +284,7 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
 - (void)percentCompleted:(BRRequest *)request{
     switch (request.requestType) {
         case kBRListDirectoryRequest:{
+            
             if (self.listProgressBlock) {
                 self.listProgressBlock(request.percentCompleted);
             }
@@ -317,9 +316,17 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
 - (void)requestCompleted:(BRRequest *)request{
     switch (request.requestType) {
         case kBRListDirectoryRequest:{
+            
+            //Save Credential on successful completion of file listing
+            if (self.shouldSaveCredential) {
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.credential];
+                [[NSUserDefaults standardUserDefaults] setObject:data forKey:kCWFTPClientSavedUser];
+            }
+            
+            BRRequestListDirectory*listDirectory = (BRRequestListDirectory *)request;
+            NSArray *files =[self.fileManager saveFilesAtDirectory:listDirectory.filesInfo];
+            
             if (self.listCompletionBlock) {
-                BRRequestListDirectory*listDirectory = (BRRequestListDirectory *)request;
-                NSArray *files =[self.fileManager saveFilesAtDirectory:listDirectory.filesInfo];
                 self.listCompletionBlock(files,nil);
             }
             break;
@@ -351,11 +358,14 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
 - (void)requestFailed:(BRRequest *)request{
     switch (request.requestType) {
         case kBRListDirectoryRequest:{
-           
+            
+            //Assuming credentials are wrong, tightly coupled with logic move to somewhere else
+            _credential = nil;
+            
             if (self.listCompletionBlock) {
                  NSError *error = [NSError errorWithDomain:@"com.FTPFOX.Error"
                                                       code:400
-                                                  userInfo:@{NSLocalizedDescriptionKey:@"Unable to fetch directory contents. Please retry later"}];
+                                                  userInfo:@{NSLocalizedDescriptionKey:@"Unable to fetch directory contents. Please check the internet connection and retry."}];
                 self.listCompletionBlock(nil,error);
             }
             
@@ -365,7 +375,7 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
             if (self.downloadCompletionBlock) {
                 NSError *error = [NSError errorWithDomain:@"com.FTPFOX.Error"
                                                      code:400
-                                                 userInfo:@{NSLocalizedDescriptionKey:@"Unable to download file. Please retry later"}];
+                                                 userInfo:@{NSLocalizedDescriptionKey:@"Unable to download file. Please check the internet connection and retry."}];
                 self.downloadCompletionBlock(nil,error);
             }
         }

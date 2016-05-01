@@ -11,6 +11,7 @@
 #import "CWFTPClient.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "CWHomeController.h"
+#import <Reachability/Reachability.h>
 
 @interface CWLoginController ()
 
@@ -49,31 +50,27 @@
     
     self.ftpClient = [CWFTPClient sharedClient];
     
-    
-    
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
-    // Do any additional setup after loading the view.
+    
+    [self addReachabilityObserver];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    if (self.ftpClient.credential || TARGET_IPHONE_SIMULATOR) {
-        self.loginView.usernameTextField.text = TARGET_IPHONE_SIMULATOR?
-        @"eauusers":self.ftpClient.credential.username;
-        
-        self.loginView.passwordTextField.text  = TARGET_IPHONE_SIMULATOR?
-        @"YTNhOTNmYTAwOTljYmFmMDlhMTJlODVl":self.ftpClient.credential.password;
-        
-        self.loginView.hostTextField.text = TARGET_IPHONE_SIMULATOR?
-        @"52.26.67.76":self.ftpClient.credential.host;
-        
-        if (TARGET_IPHONE_SIMULATOR) {
-            [self loginButtonClick:nil];
-        }else{
-            [self signUserIn];
-        }
+    //Reset save switch
+    self.loginView.saveSwitch.on = NO;
+    
+    if (self.ftpClient.credential) {
+        self.loginView.usernameTextField.text = self.ftpClient.credential.username;
+        self.loginView.passwordTextField.text  = self.ftpClient.credential.password;
+        self.loginView.hostTextField.text = self.ftpClient.credential.host;
+        [self signUserIn];
     }
+    
+    self.loginView.hostTextField.text     = @"52.26.67.76";
+    self.loginView.usernameTextField.text = @"eauusers";
+    self.loginView.passwordTextField.text = @"YTNhOTNmYTAwOTljYmFmMDlhMTJlODVl";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,7 +82,7 @@
 
 #pragma mark - Button Clicks
 
-- (void)loginButtonClick:(UIButton *)button{
+- (void)loginButtonClick:(id)sender{
     
     CWFTPClient *ftpClient = [CWFTPClient sharedClient];
     
@@ -122,6 +119,21 @@
                                       [SVProgressHUD showErrorWithStatus:error.localizedDescription];
                                   }
                               }];
+}
+
+#pragma mark - Reachability Observer
+
+- (void)addReachabilityObserver{
+    
+    // Allocate a reachability object
+    Reachability* reach = [Reachability reachabilityForInternetConnection];
+    reach.unreachableBlock = ^(Reachability*reach){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD showInfoWithStatus:@"Internet connection is Offline. Please turn on the Wi-Fi or Mobile data to continue."];
+        });
+    };
+
+    [reach startNotifier];
 }
 
 @end

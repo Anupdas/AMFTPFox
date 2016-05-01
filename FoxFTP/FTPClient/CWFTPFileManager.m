@@ -12,7 +12,7 @@
 
 NSString *const kFTPFileCacheKey = @"FTPFileCacheKey";
 
-NSString *const CWFTPRootDirectory = @"/FoxFTP_Cyware/";
+NSString *const CWFTPRootDirectory = @"/";
 
 @interface CWFTPFileManager ()
 
