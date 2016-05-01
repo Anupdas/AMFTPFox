@@ -23,6 +23,16 @@ NSString *const kCWFTPFileKCFFTPResourceProgress = @"kCFFTPResourceProgress";
 
 @implementation CWFTPFile
 
++ (NSMutableArray *)modelsFromDictionaries:(NSArray *)dictionaries{
+    NSMutableArray *files = [NSMutableArray new];
+    for (NSDictionary *dict in dictionaries) {
+        id file = [self modelObjectWithDictionary:dict];
+        if (file) {
+            [files addObject:file];
+        }
+    }return files;
+}
+
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict
 {
     return [[self alloc] initWithDictionary:dict];
@@ -90,7 +100,6 @@ NSString *const kCWFTPFileKCFFTPResourceProgress = @"kCFFTPResourceProgress";
     CWFTPFile *copy = [[CWFTPFile alloc] init];
     
     if (copy) {
-        
         copy.resourceType = self.resourceType;
         copy.resourceName = [self.resourceName copyWithZone:zone];
         copy.resourceSize = self.resourceSize;
@@ -99,12 +108,39 @@ NSString *const kCWFTPFileKCFFTPResourceProgress = @"kCFFTPResourceProgress";
     return copy;
 }
 
-#pragma mark - 
+#pragma mark - Equality
+
+- (BOOL)isEqual:(id)object{
+    if (self == object) {
+        return YES;
+    }else if([object isKindOfClass:[CWFTPFile class]]){
+        return [self isEqualToFTPFile:object];
+    }return NO;
+}
+
+/**
+ *  Equality of two FTP File Objects. Resource file size and resource name
+ *
+ *  @param file Second Object
+ *
+ *  @return YES is same
+ */
+- (BOOL)isEqualToFTPFile:(CWFTPFile *)file{
+    return self.resourceSize == file.resourceSize &&
+            [self.resourceName isEqualToString:file.resourceName];
+}
+                                   
+
+#pragma mark - KVO for progress
 
 - (void)setProgress:(float)progress{
     [self willChangeValueForKey:@"progress"];
     _progress = progress;
     [self didChangeValueForKey:@"progress"];
+}
+
+- (BOOL)isDirectory{
+    return self.resourceType == 4;
 }
 
 @end

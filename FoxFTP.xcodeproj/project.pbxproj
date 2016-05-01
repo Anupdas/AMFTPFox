@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E13C18A1CD5569E00989F72 /* CWDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13C1891CD5569E00989F72 /* CWDetailViewController.m */; };
+		6E13C18D1CD5587A00989F72 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E13C18B1CD5582700989F72 /* MediaPlayer.framework */; };
+		6E13C1921CD5CF1E00989F72 /* NSArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13C1911CD5CF1E00989F72 /* NSArray+Additions.m */; };
+		6E13C1951CD5D8A300989F72 /* CWFTPCredential.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13C1941CD5D8A300989F72 /* CWFTPCredential.m */; };
 		6E164ACC1CD5084100AE2AA4 /* CWFTPFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E164ACB1CD5084100AE2AA4 /* CWFTPFile.m */; };
+		6E164ACF1CD541E700AE2AA4 /* CWFTPFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E164ACE1CD541E700AE2AA4 /* CWFTPFileManager.m */; };
 		6E74EE731CD47F9000C1CA97 /* BRRequest+_UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE601CD47F9000C1CA97 /* BRRequest+_UserData.m */; };
 		6E74EE741CD47F9000C1CA97 /* BRRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE621CD47F9000C1CA97 /* BRRequest.m */; };
 		6E74EE751CD47F9000C1CA97 /* BRRequestCreateDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74EE641CD47F9000C1CA97 /* BRRequestCreateDirectory.m */; };
@@ -36,15 +41,23 @@
 		6E7C62F01CD4F3D000A2C29C /* CWUploadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C62EF1CD4F3D000A2C29C /* CWUploadTableViewCell.m */; };
 		6E7C62F41CD4FBBD00A2C29C /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7C62F31CD4FBBD00A2C29C /* Photos.framework */; };
 		6E938C3F1CD4B83B00EAFB0B /* CWFileTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E938C3E1CD4B83B00EAFB0B /* CWFileTableViewHeader.m */; };
-		6E938C421CD4C6D900EAFB0B /* CWFTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E938C411CD4C6D900EAFB0B /* CWFTPOperation.m */; };
 		C5398A5B6F32200BA03D2D09 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6053E23F5C33DC0C1F349AA5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1F59892CB06FEE7D26A7E9E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6053E23F5C33DC0C1F349AA5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E13C1881CD5569E00989F72 /* CWDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWDetailViewController.h; sourceTree = "<group>"; };
+		6E13C1891CD5569E00989F72 /* CWDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWDetailViewController.m; sourceTree = "<group>"; };
+		6E13C18B1CD5582700989F72 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		6E13C1901CD5CF1E00989F72 /* NSArray+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Additions.h"; path = "Categories/NSArray+Additions.h"; sourceTree = "<group>"; };
+		6E13C1911CD5CF1E00989F72 /* NSArray+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Additions.m"; path = "Categories/NSArray+Additions.m"; sourceTree = "<group>"; };
+		6E13C1931CD5D8A300989F72 /* CWFTPCredential.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWFTPCredential.h; path = FTPClient/CWFTPCredential.h; sourceTree = "<group>"; };
+		6E13C1941CD5D8A300989F72 /* CWFTPCredential.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWFTPCredential.m; path = FTPClient/CWFTPCredential.m; sourceTree = "<group>"; };
 		6E164ACA1CD5084100AE2AA4 /* CWFTPFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWFTPFile.h; path = FTPClient/CWFTPFile.h; sourceTree = "<group>"; };
 		6E164ACB1CD5084100AE2AA4 /* CWFTPFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWFTPFile.m; path = FTPClient/CWFTPFile.m; sourceTree = "<group>"; };
+		6E164ACD1CD541E700AE2AA4 /* CWFTPFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWFTPFileManager.h; path = FTPClient/CWFTPFileManager.h; sourceTree = "<group>"; };
+		6E164ACE1CD541E700AE2AA4 /* CWFTPFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWFTPFileManager.m; path = FTPClient/CWFTPFileManager.m; sourceTree = "<group>"; };
 		6E74EE5E1CD47F9000C1CA97 /* BRGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRGlobal.h; sourceTree = "<group>"; };
 		6E74EE5F1CD47F9000C1CA97 /* BRRequest+_UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BRRequest+_UserData.h"; sourceTree = "<group>"; };
 		6E74EE601CD47F9000C1CA97 /* BRRequest+_UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BRRequest+_UserData.m"; sourceTree = "<group>"; };
@@ -100,8 +113,6 @@
 		6E7C62F31CD4FBBD00A2C29C /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		6E938C3D1CD4B83B00EAFB0B /* CWFileTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWFileTableViewHeader.h; path = Controllers/Home/TableView/CWFileTableViewHeader.h; sourceTree = "<group>"; };
 		6E938C3E1CD4B83B00EAFB0B /* CWFileTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWFileTableViewHeader.m; path = Controllers/Home/TableView/CWFileTableViewHeader.m; sourceTree = "<group>"; };
-		6E938C401CD4C6D900EAFB0B /* CWFTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CWFTPOperation.h; path = FTPClient/CWFTPOperation.h; sourceTree = "<group>"; };
-		6E938C411CD4C6D900EAFB0B /* CWFTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CWFTPOperation.m; path = FTPClient/CWFTPOperation.m; sourceTree = "<group>"; };
 		EE25E13D344E9660CC8C1874 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E13C18D1CD5587A00989F72 /* MediaPlayer.framework in Frameworks */,
 				6E7C62F41CD4FBBD00A2C29C /* Photos.framework in Frameworks */,
 				C5398A5B6F32200BA03D2D09 /* libPods.a in Frameworks */,
 			);
@@ -118,6 +130,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E13C1871CD5568500989F72 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				6E13C1881CD5569E00989F72 /* CWDetailViewController.h */,
+				6E13C1891CD5569E00989F72 /* CWDetailViewController.m */,
+			);
+			name = Detail;
+			path = Controllers/Detail;
+			sourceTree = "<group>";
+		};
+		6E13C18E1CD5C84600989F72 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E164ACA1CD5084100AE2AA4 /* CWFTPFile.h */,
+				6E164ACB1CD5084100AE2AA4 /* CWFTPFile.m */,
+				6E164ACD1CD541E700AE2AA4 /* CWFTPFileManager.h */,
+				6E164ACE1CD541E700AE2AA4 /* CWFTPFileManager.m */,
+			);
+			name = Files;
+			sourceTree = "<group>";
+		};
+		6E13C18F1CD5C87000989F72 /* FTP */ = {
+			isa = PBXGroup;
+			children = (
+				6E74F54B1CD0B66600986C58 /* CWFTPClient.h */,
+				6E74F54C1CD0B66600986C58 /* CWFTPClient.m */,
+				6E74EE871CD493BB00C1CA97 /* BRRequest+Additions.h */,
+				6E74EE881CD493BB00C1CA97 /* BRRequest+Additions.m */,
+				6E13C1931CD5D8A300989F72 /* CWFTPCredential.h */,
+				6E13C1941CD5D8A300989F72 /* CWFTPCredential.m */,
+			);
+			name = FTP;
+			sourceTree = "<group>";
+		};
 		6E74EE5C1CD47F9000C1CA97 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,9 +248,10 @@
 		6E74F5351CD0957700986C58 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6E74F5381CD0959F00986C58 /* Upload */,
-				6E74F5371CD0959600986C58 /* Home */,
 				6E74F5361CD0958E00986C58 /* Login */,
+				6E74F5371CD0959600986C58 /* Home */,
+				6E74F5381CD0959F00986C58 /* Upload */,
+				6E13C1871CD5568500989F72 /* Detail */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -245,6 +292,8 @@
 			children = (
 				6E74F5471CD0AEA000986C58 /* UIColor+Theme.h */,
 				6E74F5481CD0AEA000986C58 /* UIColor+Theme.m */,
+				6E13C1901CD5CF1E00989F72 /* NSArray+Additions.h */,
+				6E13C1911CD5CF1E00989F72 /* NSArray+Additions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -252,14 +301,8 @@
 		6E74F54A1CD0B60D00986C58 /* FTPClient */ = {
 			isa = PBXGroup;
 			children = (
-				6E74F54B1CD0B66600986C58 /* CWFTPClient.h */,
-				6E74F54C1CD0B66600986C58 /* CWFTPClient.m */,
-				6E74EE871CD493BB00C1CA97 /* BRRequest+Additions.h */,
-				6E74EE881CD493BB00C1CA97 /* BRRequest+Additions.m */,
-				6E938C401CD4C6D900EAFB0B /* CWFTPOperation.h */,
-				6E938C411CD4C6D900EAFB0B /* CWFTPOperation.m */,
-				6E164ACA1CD5084100AE2AA4 /* CWFTPFile.h */,
-				6E164ACB1CD5084100AE2AA4 /* CWFTPFile.m */,
+				6E13C18F1CD5C87000989F72 /* FTP */,
+				6E13C18E1CD5C84600989F72 /* Files */,
 			);
 			name = FTPClient;
 			sourceTree = "<group>";
@@ -301,6 +344,7 @@
 		EF6AF9E505E70F94207FEA9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6E13C18B1CD5582700989F72 /* MediaPlayer.framework */,
 				6E7C62F31CD4FBBD00A2C29C /* Photos.framework */,
 				6053E23F5C33DC0C1F349AA5 /* libPods.a */,
 			);
@@ -428,9 +472,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E164ACF1CD541E700AE2AA4 /* CWFTPFileManager.m in Sources */,
+				6E13C1951CD5D8A300989F72 /* CWFTPCredential.m in Sources */,
 				6E164ACC1CD5084100AE2AA4 /* CWFTPFile.m in Sources */,
 				6E74F5441CD09A2000986C58 /* CWLoginView.m in Sources */,
 				6E74EE791CD47F9000C1CA97 /* BRRequestListDirectory.m in Sources */,
+				6E13C1921CD5CF1E00989F72 /* NSArray+Additions.m in Sources */,
 				6E74EE761CD47F9000C1CA97 /* BRRequestDelete.m in Sources */,
 				6E7C62E81CD4F1C400A2C29C /* CWFileTableViewCell.m in Sources */,
 				6E74F54D1CD0B66600986C58 /* CWFTPClient.m in Sources */,
@@ -449,11 +496,11 @@
 				6E938C3F1CD4B83B00EAFB0B /* CWFileTableViewHeader.m in Sources */,
 				6E74EE771CD47F9000C1CA97 /* BRRequestDownload.m in Sources */,
 				6E74F5201CD0949500986C58 /* main.m in Sources */,
-				6E938C421CD4C6D900EAFB0B /* CWFTPOperation.m in Sources */,
 				6E7C62ED1CD4F3A900A2C29C /* CWUploadTableViewFooter.m in Sources */,
 				6E7C62F01CD4F3D000A2C29C /* CWUploadTableViewCell.m in Sources */,
 				6E74EE891CD493BB00C1CA97 /* BRRequest+Additions.m in Sources */,
 				6E74EE751CD47F9000C1CA97 /* BRRequestCreateDirectory.m in Sources */,
+				6E13C18A1CD5569E00989F72 /* CWDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

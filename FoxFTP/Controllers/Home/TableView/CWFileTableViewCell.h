@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class CWFTPFile;
+
 @interface CWFileTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) NSDictionary *file;
+@property (nonatomic, strong) CWFTPFile *file;
 
 @end

@@ -11,13 +11,19 @@
 #import "CWUploadTableViewFooter.h"
 #import <CTAssetsPickerController/CTAssetsPickerController.h>
 #import <Photos/Photos.h>
+
+#import "CWFTPClient.h"
 #import "CWFTPFile.h"
 
+#import <KVOController/NSObject+FBKVOController.h>
+
 @interface CWUploadController ()<UITableViewDataSource,UITableViewDelegate,
-                                    CTAssetsPickerControllerDelegate>
+CTAssetsPickerControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *files;
+@property (nonatomic, strong) NSArray *files;
+
+@property (nonatomic, weak) CWFTPClient *ftpClient;
 
 @end
 
@@ -27,13 +33,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.ftpClient = [CWFTPClient sharedClient];
+    
     [self.view addSubview:self.tableView];
     [self.tableView autoPinEdgesToSuperviewEdges];
+    
+    [self addObserver];
+}
+
+- (void)addObserver{
+    __weak CWUploadController *weakSelf = self;
+    [self.KVOController observe:self.ftpClient
+                        keyPath:@"uploadCount"
+                        options:NSKeyValueObservingOptionNew
+                          block:^(CWUploadController *o, CWFTPClient *c, NSDictionary *change) {
+        _files = [c allUploadFiles];
+        [weakSelf.tableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - Button Click
@@ -64,23 +91,27 @@
         didFinishPickingAssets:(NSArray *)assets{
     // assets contains PHAsset objects.
     
-    PHImageManager *imageManager = [PHImageManager defaultManager];
-    PHImageRequestOptions *options = [PHImageRequestOptions new];
-    options.version = PHImageRequestOptionsVersionOriginal;
-    options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
-    for (PHAsset *asset in assets) {
-        [imageManager requestImageDataForAsset:asset
-                                       options:options
-                                 resultHandler:^(NSData * _Nullable imageData,
-                                                 NSString * _Nullable dataUTI,
-                                                 UIImageOrientation orientation,
-                                                 NSDictionary * _Nullable info) {
-                                     
-                                    CWFTPFile *file = [self fileFromAssetInfo:info];
-                                    file.resourceSize = (int64_t)imageData.length;
-                                    [self.files addObject:file];
-                            
-                                 }];
+    if(assets.count){
+        __weak CWUploadController *weakSelf = self;
+        
+        PHImageManager *imageManager = [PHImageManager defaultManager];
+        PHImageRequestOptions *options = [PHImageRequestOptions new];
+        options.version = PHImageRequestOptionsVersionOriginal;
+        options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+        for (PHAsset *asset in assets) {
+            [imageManager requestImageDataForAsset:asset
+                                           options:options
+                                     resultHandler:^(NSData * _Nullable imageData,
+                                                     NSString * _Nullable dataUTI,
+                                                     UIImageOrientation orientation,
+                                                     NSDictionary * _Nullable info) {
+                                         
+                                         CWFTPFile *file = [self fileFromAssetInfo:info];
+                                         file.resourceData = imageData;
+                                         file.resourceSize = (int64_t)imageData.length;
+                                         [weakSelf.ftpClient uploadFile:file];
+                                     }];
+        }
     }
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -90,7 +121,10 @@
     CWFTPFile *file = [CWFTPFile new];
     file.fileID = [info[@"PHImageResultRequestIDKey"] integerValue];
     file.fileURL = info[@"PHImageFileURLKey"];
-    file.resourceName = file.fileURL.lastPathComponent;
+    
+    //Find a non conflicting name
+    NSString *fileName = file.fileURL.lastPathComponent;
+    file.resourceName = [self.ftpClient.fileManager findUniqueFileName:fileName];
     return file;
 }
 

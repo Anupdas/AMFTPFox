@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class CWFTPFile;
 @interface CWUploadTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UIButton *cancelButton;
 
-@property (nonatomic, strong) NSDictionary *file;
+@property (nonatomic, strong) CWFTPFile *file;
 
 - (void)setProgress:(CGFloat)progress;
 

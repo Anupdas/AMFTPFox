@@ -11,20 +11,20 @@
 #import "CWFileTableViewHeader.h"
 #import "CWFileTableViewFooter.h"
 #import "CWUploadController.h"
+#import "CWDetailViewController.h"
 
 #import "CWFTPClient.h"
+#import "CWFTPFile.h"
+
+#import <KVOController/NSObject+FBKVOController.h>
 
 @interface CWHomeController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) CWFileTableViewHeader *headerView;
 
-
+@property (nonatomic, strong) CWUploadController *uploadViewController;
 @property (nonatomic, weak) CWFTPClient *ftpClient;
-@property (nonatomic, strong) NSString *hostName;
-@property (nonatomic, strong) NSString *username;
-
-@property (nonatomic, assign, getter=isUploading) BOOL uploading;
 
 @end
 
@@ -40,19 +40,23 @@
     [self.tableView autoPinEdgesToSuperviewEdges];
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
-    self.title = self.ftpClient.username;
-    self.hostName = self.ftpClient.host;
+    self.title = self.ftpClient.credential.username;
     
     UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout"
                                                                style:UIBarButtonItemStylePlain
                                                               target:self action:@selector(logoutButtonClick:)];
     self.navigationItem.rightBarButtonItem = logout;
+    
+    [self addObserver];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    self.headerView.hostName = self.hostName;
+    self.headerView.hostName = self.ftpClient.credential.host;
+    
+//    _files = self.ftpClient.fileManager.files;
+//    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,11 +67,12 @@
 #pragma mark - Button Clicks
 
 - (void)uploadButtonClick:(id)sender{
-    CWUploadController *vc = [CWUploadController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:self.uploadViewController
+                                         animated:YES];
 }
 
 - (void)logoutButtonClick:(id)sender{
+    [self.ftpClient logOutUser];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -93,7 +98,11 @@
     }return _headerView;
 }
 
-
+- (CWUploadController *)uploadViewController{
+    if (!_uploadViewController) {
+        _uploadViewController = [CWUploadController new];
+    }return _uploadViewController;
+}
 
 #pragma mark - UITableViewDatasource
 
@@ -114,10 +123,9 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return self.isUploading?64.0f:30.0f;
+    return 40.0f;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    [self.headerView setShowProgress:self.isUploading];
     return self.headerView;
 }
 
@@ -135,6 +143,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    CWFTPFile *file = self.files[indexPath.row];
+    if (![file isDirectory]) {
+        CWDetailViewController *vc = [[CWDetailViewController alloc] initWithFile:file];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+}
+
+#pragma mark - Observer
+
+- (void)addObserver{
+    __weak CWHomeController *weakSelf = self;
+    [self.KVOController observe:self.ftpClient
+                        keyPaths:@[@"uploadProgress",@"uploadCount"]
+                        options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                          block:^(CWHomeController *o, CWFTPClient *c, NSDictionary *change) {
+                              [weakSelf.headerView setShowProgress:c.uploadCount>0];
+                              [weakSelf.headerView setProgressInfo:@{@"Progress":@(c.uploadProgress),
+                                                                     @"Count":@(c.uploadCount)}];
+                          }];
+    
+    [self.KVOController observe:self.ftpClient.fileManager
+                        keyPath:@"fileCount"
+                        options:NSKeyValueObservingOptionNew
+                          block:^(CWHomeController *o, CWFTPFileManager *c, NSDictionary *change) {
+                              weakSelf.files = c.files;
+                              [weakSelf.tableView reloadData];
+                              
+                          }];
 }
 
 @end

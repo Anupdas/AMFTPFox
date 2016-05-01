@@ -34,6 +34,7 @@
         _addFileButton = [UIButton buttonWithType:UIButtonTypeSystem];
         _addFileButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_addFileButton setTitle:@"Add File" forState:UIControlStateNormal];
+        _addFileButton.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
     }return _addFileButton;
 }
 

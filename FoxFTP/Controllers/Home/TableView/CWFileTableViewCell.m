@@ -7,6 +7,7 @@
 //
 
 #import "CWFileTableViewCell.h"
+#import "CWFTPFile.h"
 
 NSString * kFileName = @"kCFFTPResourceName";
 NSString * kFileSize = @"kCFFTPResourceSize";
@@ -19,17 +20,20 @@ NSString * kFileType = @"kCFFTPResourceType";
     return [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
 }
 
-- (void)setFile:(NSDictionary *)file{
+- (void)setFile:(CWFTPFile *)file{
     _file = file;
     [self reloadData];
 }
 
 - (void)reloadData{
-    self.textLabel.text = self.file[kFileName];
-    self.detailTextLabel.text = [NSByteCountFormatter stringFromByteCount:[self.file[kFileSize] longLongValue]
+    self.textLabel.text = self.file.resourceName;
+    self.detailTextLabel.text = [NSByteCountFormatter stringFromByteCount:self.file.resourceSize
                                                                countStyle:NSByteCountFormatterCountStyleFile];
-    NSString *name = [self.file[kFileType] integerValue] == 8?@"Folder":@"File";
+    
+    BOOL isFolder = [self.file isDirectory];
+    NSString *name = isFolder?@"Folder":@"File";
     self.imageView.image = [UIImage imageNamed:name];
+    self.selectionStyle = isFolder?UITableViewCellSelectionStyleNone:UITableViewCellFocusStyleDefault;
 }
 
 @end

@@ -15,6 +15,7 @@
 @interface CWLoginController ()
 
 @property (nonatomic, strong) CWLoginView *loginView;
+@property (nonatomic, strong) CWFTPClient *ftpClient;
 
 @end
 
@@ -29,11 +30,6 @@
                                    action:@selector(loginButtonClick:)
                          forControlEvents:UIControlEventTouchUpInside];
         
-        if (TARGET_IPHONE_SIMULATOR) {
-            _loginView.hostTextField.text = @"52.26.67.76";
-            _loginView.usernameTextField.text = @"eauusers";
-            _loginView.passwordTextField.text = @"YTNhOTNmYTAwOTljYmFmMDlhMTJlODVl";
-        }
     }return _loginView;
 }
 
@@ -51,8 +47,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.ftpClient = [CWFTPClient sharedClient];
+    
+    
+    
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    if (self.ftpClient.credential || TARGET_IPHONE_SIMULATOR) {
+        self.loginView.usernameTextField.text = TARGET_IPHONE_SIMULATOR?
+        @"eauusers":self.ftpClient.credential.username;
+        
+        self.loginView.passwordTextField.text  = TARGET_IPHONE_SIMULATOR?
+        @"YTNhOTNmYTAwOTljYmFmMDlhMTJlODVl":self.ftpClient.credential.password;
+        
+        self.loginView.hostTextField.text = TARGET_IPHONE_SIMULATOR?
+        @"52.26.67.76":self.ftpClient.credential.host;
+        
+        if (TARGET_IPHONE_SIMULATOR) {
+            [self loginButtonClick:nil];
+        }else{
+            [self signUserIn];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,31 +88,40 @@
 - (void)loginButtonClick:(UIButton *)button{
     
     CWFTPClient *ftpClient = [CWFTPClient sharedClient];
-    ftpClient.host = self.loginView.hostTextField.text;
-    ftpClient.username = self.loginView.usernameTextField.text;
-    ftpClient.password = self.loginView.passwordTextField.text;
     
+    CWFTPCredential *credential = [CWFTPCredential new];
+    credential.host     = self.loginView.hostTextField.text;
+    credential.username = self.loginView.usernameTextField.text;
+    credential.password = self.loginView.passwordTextField.text;
+    
+    [ftpClient signInWithCredential:credential
+                               save:self.loginView.saveSwitch.isOn];
+    
+    
+    [self signUserIn];
+}
+
+- (void)signUserIn{
     [SVProgressHUD showWithStatus:@"Connecting to Server..."];
     
     __weak CWLoginController *weakSelf = self;
-    [ftpClient listContentsAtPath:@"/"
-                         progress:^(float percentage) {
-                             //[SVProgressHUD showProgress:percentage status:@"Downloading Contents"];
-    }   completion:^(id response, NSError *error) {
-        if ([response isKindOfClass:[NSArray class]]) {
-            
-            [SVProgressHUD dismiss];
-            
-            CWHomeController *vc = [CWHomeController new];
-            vc.files = (NSArray *)response;
-            [weakSelf.navigationController setNavigationBarHidden:NO animated:YES];
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-            
-        }else{
-            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-        }
-    }];
-    
+    [self.ftpClient listContentsAtPath:@"/"
+                              progress:^(float percentage) {
+                                  [SVProgressHUD showProgress:percentage status:@"Downloading files..."];
+                              }   completion:^(id response, NSError *error) {
+                                  if ([response isKindOfClass:[NSArray class]]) {
+                                      
+                                      [SVProgressHUD dismiss];
+                                      
+                                      CWHomeController *vc = [CWHomeController new];
+                                      vc.files = (NSArray *)response;
+                                      [weakSelf.navigationController setNavigationBarHidden:NO animated:YES];
+                                      [weakSelf.navigationController pushViewController:vc animated:YES];
+                                      
+                                  }else{
+                                      [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+                                  }
+                              }];
 }
 
 @end

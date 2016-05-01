@@ -7,10 +7,14 @@
 //
 
 #import "CWUploadTableViewCell.h"
+#import "CWFTPFile.h"
+#import <KVOController/FBKVOController.h>
 
 NSString * kUploadFileName = @"kCFFTPResourceName";
 
-@interface CWUploadTableViewCell ()
+@interface CWUploadTableViewCell (){
+    FBKVOController *_KVOController;
+}
 
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) UILabel *fileNameLabel;
@@ -29,6 +33,9 @@ NSString * kUploadFileName = @"kCFFTPResourceName";
         [self.contentView addSubview:self.fileNameLabel];
         [self.contentView addSubview:self.progressView];
         [self.contentView addSubview:self.cancelButton];
+        
+        // create KVO controller instance
+        _KVOController = [FBKVOController controllerWithObserver:self];
     }return self;
 }
 
@@ -40,12 +47,12 @@ NSString * kUploadFileName = @"kCFFTPResourceName";
                                 @"progress":self.progressView};
         
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
-                                          @"V:|-10-[name]-10-[progress]-10-|" options:0 metrics:nil views:views]];
+                                          @"V:|-5-[name]-10-[progress]-5-|" options:0 metrics:nil views:views]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
                                           @"H:|-10-[name]-10-[cancel]-10-|" options:0 metrics:nil views:views]];
         [self.cancelButton autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:10.0f];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
-                                          @"H:|-10-[progress]-10-" options:0 metrics:nil views:views]];
+                                          @"H:|-10-[progress]-10-|" options:0 metrics:nil views:views]];
         
         self.didLayoutConstraints = YES;
     }[super layoutSubviews];
@@ -53,20 +60,35 @@ NSString * kUploadFileName = @"kCFFTPResourceName";
 
 #pragma mark - 
 
-- (void)setFile:(NSDictionary *)file{
+- (void)setFile:(CWFTPFile *)file{
+    if (self.file == file) return;
+    
     _file = file;
     [self reloadData];
+    
+    __weak CWUploadTableViewCell *weakSelf = self;
+    [_KVOController observe:file keyPath:@"progress"
+                    options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
+                      block:^(CWUploadTableViewCell *cell, CWFTPFile *file, NSDictionary *change) {
+                          // update observer with new value
+                          CGFloat progress = [change[NSKeyValueChangeNewKey] floatValue];
+                          [weakSelf setProgress:progress];
+                      }];
 }
 
 - (void)reloadData{
-    self.fileNameLabel.text = self.file[kUploadFileName];
+    self.fileNameLabel.text = self.file.resourceName;
 }
 
 - (void)setProgress:(CGFloat)progress{
     self.progressView.progress = progress;
+    
+    BOOL hide = progress == 1;
+    self.cancelButton.hidden = hide;
+    self.progressView.hidden = hide;
 }
 
-#pragma mark - 
+#pragma mark -
 
 - (UIButton *)cancelButton{
     if (!_cancelButton) {
@@ -79,6 +101,7 @@ NSString * kUploadFileName = @"kCFFTPResourceName";
 - (UIProgressView *)progressView{
     if (!_progressView) {
         _progressView = [UIProgressView newAutoLayoutView];
+        _progressView.progress = 0.5f;
     }return _progressView;
 }
 

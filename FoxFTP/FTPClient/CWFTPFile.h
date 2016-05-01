@@ -10,7 +10,8 @@
 
 typedef enum {
     CWFTPFileTypeImage = 0,
-    CWFTPFileTypeVideo
+    CWFTPFileTypeVideo = 1,
+    CWFTPFileTypeDirectory = 4
 }CWFTPFileType;
 
 @interface CWFTPFile : NSObject<NSCoding>
@@ -40,14 +41,23 @@ typedef enum {
 @property (nonatomic, assign) int64_t resourceSize;
 
 /**
+ *  Resource Data for Upload
+ */
+@property (nonatomic, strong) NSData *resourceData;
+
+/**
  *  Upload Progress
  */
 @property (nonatomic, assign) float progress;
+
+- (BOOL)isDirectory;
 
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)dictionaryRepresentation;
+
++ (NSMutableArray *)modelsFromDictionaries:(NSArray *)dictionaries;
 
 
 @end

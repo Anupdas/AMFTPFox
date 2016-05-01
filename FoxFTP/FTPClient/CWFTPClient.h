@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CWFTPCredential.h"
+#import "CWFTPFileManager.h"
 @class CWFTPFile;
 
 extern NSString *const CWFTPRequestProgressChanged;
@@ -18,12 +20,19 @@ typedef void(^CWFTPProgressBlock)(float percentage);
 
 @interface CWFTPClient : NSObject
 
-@property (nonatomic, strong) NSString *host;
-@property (nonatomic, strong) NSString *username;
-@property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong, readonly) CWFTPCredential *credential;
 
-@property (nonatomic, assign) NSUInteger uploadCount;
-@property (nonatomic, assign) float uploadProgress;
+/**
+ *  Observable Upload Count
+ */
+@property (nonatomic, assign, readonly) NSUInteger uploadCount;
+
+/**
+ *  Observable Upload Progress
+ */
+@property (nonatomic, assign, readonly) float uploadProgress;
+
+@property (nonatomic, strong, readonly) CWFTPFileManager *fileManager;
 
 /**
  *  Shared Instance of FTP Client
@@ -32,39 +41,40 @@ typedef void(^CWFTPProgressBlock)(float percentage);
  */
 + (instancetype)sharedClient;
 
-#pragma mark - Operations
-
 /**
- *  Flag to denote if upload is in progress
- */
-@property (nonatomic, assign, getter=isUploading) BOOL uploading;
-
-/**
- *  Maximum concurrent upload operations
- */
-@property (nonatomic, assign) NSUInteger maxConcurrentUploads;
-
-/**
- *  Current Upload Task Count
+ *  Update FTP Credentials. Clears all cached associated with a user on changing credential
  *
- *  @return Task Count
+ *  @param credentials Credential Instance. Should have a valid host, username and password
  */
-- (NSUInteger)ongoingUploadTasks;
+- (void)signInWithCredential:(CWFTPCredential *)credentials
+                        save:(BOOL)shouldSave;
 
 /**
- *  Maximum concurrent download operations
+ *  Removes saved credential if any and stops all ongoing requests
  */
-@property (nonatomic, assign) NSUInteger maxConcurrentDownloads;
+- (void)logOutUser;
+
+
+#pragma mark - Resources
 
 /**
- *  Cancel On going operations
+ *  All Upload Files In progress
+ *
+ *  @return CWFTPFile Instances
  */
-- (void)cancelAllOperations;
+- (NSArray *)allUploadFiles;
+
+/**
+ *  All Files in current directory
+ *
+ *  @return CWFTPFile Instances
+ */
+- (NSArray *)currentDirectoryFiles;
 
 #pragma mark - API Calls
 
 /**
- *  List directory contents at path.
+ *  List directory contents at path. Only one list operation is possible at any time.
  *
  *  @param path    Path to remote directory to list.
  *  @param success Method called when process succeeds.
@@ -75,29 +85,46 @@ typedef void(^CWFTPProgressBlock)(float percentage);
                 completion:(CWFTPCompletionBlock)completionBlock;
 
 /**
- *  Download a file asynchronously
+ *  Download a file asynchronously. Only one download is possible at any time. 
  *
- *  @param remotePath Full path of remote file to download.
- *  @param localPath  Local path to download file to.
+ *  @param resourceName    Name of resource
+ *  @param progressBlock   Progress Block with percentage
+ *  @param completionBlock Completion Block with receiveData and error if any, either data or error
  */
-- (void)downloadFile:(NSString *)remotePath
-              toPath:(NSString *)localPath;
+- (void)downloadFile:(NSString *)resourceName
+            progress:(CWFTPProgressBlock)progressBlock
+          completion:(CWFTPCompletionBlock)completionBlock;
 
 /**
- *  Upload file to specific directory on remote server.
+ *  Create directory
+ *
+ *  @param directory       Directory path
+ *  @param completionBlock Asynchronous completionBlock
+ */
+- (void)createDirectory:(NSString *)directory
+             completion:(CWFTPCompletionBlock)completionBlock;
+
+/**
+ *  Upload file to specific directory on remote server. Multiple downloads are possible.
  *
  *  @param file Instance of file with fileURL and fileID
  */
 - (void)uploadFile:(CWFTPFile *)file;
 
 /**
+ *  Cancel Ongoing upload operation
+ *
+ *  @param file CWFTPFile instance
+ */
+- (void)cancelUploadFile:(CWFTPFile *)file;
+
+/**
  *  Delete a file at specified remote path.
  *
  *  @param remotePath The path to the remote resource to delete.
  *
- *  @return YES on success. NO on failure.
  */
-- (BOOL)deleteFileAtPath:(NSString *)remotePath;
+- (void)deleteFileAtPath:(NSString *)remotePath;
 
 
 @end

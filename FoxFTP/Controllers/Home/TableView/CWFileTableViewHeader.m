@@ -36,11 +36,11 @@
                                 @"progress":self.progressView,
                                 @"info":self.infoLabel};
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
-                                          @"V:|-10-[host]-10-[progress]" options:0 metrics:nil views:views]];
+                                          @"V:|-10-[host]-3-[progress]" options:0 metrics:nil views:views]];
         [self.hostNameLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:10.0f];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
                                           @"H:|-10-[progress]-10-[info(<=60)]-10-|" options:0 metrics:nil views:views]];
-        [self.infoLabel autoAlignAxis:ALAxisHorizontal toSameAxisOfView:self.progressView];
+        [self.infoLabel autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
         
         self.didLayoutConstraints = YES;
     }[super layoutSubviews];

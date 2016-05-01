@@ -34,6 +34,7 @@
         _uploadButton = [UIButton buttonWithType:UIButtonTypeSystem];
         _uploadButton.translatesAutoresizingMaskIntoConstraints = YES;
         [_uploadButton setTitle:@"Upload File" forState:UIControlStateNormal];
+        _uploadButton.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
     }return _uploadButton;
 }
 
