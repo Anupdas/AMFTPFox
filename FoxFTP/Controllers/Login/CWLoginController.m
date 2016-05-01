@@ -11,7 +11,6 @@
 #import "CWFTPClient.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "CWHomeController.h"
-#import <Reachability/Reachability.h>
 
 @interface CWLoginController ()
 
@@ -51,8 +50,6 @@
     self.ftpClient = [CWFTPClient sharedClient];
     
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
-    
-    [self addReachabilityObserver];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -119,21 +116,6 @@
                                       [SVProgressHUD showErrorWithStatus:error.localizedDescription];
                                   }
                               }];
-}
-
-#pragma mark - Reachability Observer
-
-- (void)addReachabilityObserver{
-    
-    // Allocate a reachability object
-    Reachability* reach = [Reachability reachabilityForInternetConnection];
-    reach.unreachableBlock = ^(Reachability*reach){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD showInfoWithStatus:@"Internet connection is Offline. Please turn on the Wi-Fi or Mobile data to continue."];
-        });
-    };
-
-    [reach startNotifier];
 }
 
 @end
