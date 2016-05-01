@@ -26,6 +26,8 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
 
 @property (nonatomic, strong, readwrite) CWFTPCredential *credential;
 
+@property (nonatomic, copy) CWFTPCompletionBlock signInCompletionBlock;
+
 @property (nonatomic, copy) CWFTPProgressBlock listProgressBlock;
 @property (nonatomic, copy) CWFTPCompletionBlock listCompletionBlock;
 
@@ -90,6 +92,7 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
 
 - (void)signInWithCredential:(CWFTPCredential *)credential
                     save:(BOOL)shouldSave{
+
     _credential = credential;
     _fileManager = [[CWFTPFileManager alloc] initWithHost:credential.host username:credential.username];
     
@@ -251,10 +254,20 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
 }
 
 - (void)cancelUploadFile:(CWFTPFile *)file{
-    for (BRRequest *r in self.ftpRequests) {
-        if (r.ftpFile == file) {
-            r.cancelDoesNotCallDelegate = YES;
-            [self cancelRequest:r];
+    for (BRRequest *request in self.ftpRequests) {
+        if (request.ftpFile == file) {
+            request.cancelDoesNotCallDelegate = YES;
+            [self cancelRequest:request];
+            break;
+        }
+    }
+}
+
+- (void)cancelDownloadRequest{
+    for (BRRequest *request in self.ftpRequests) {
+        if (request.requestType == kBRDownloadRequest) {
+            request.cancelDoesNotCallDelegate = YES;
+            [self cancelRequest:request];
             break;
         }
     }

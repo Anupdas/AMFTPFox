@@ -33,23 +33,14 @@ CTAssetsPickerControllerDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = @"Upload File";
+    
     self.ftpClient = [CWFTPClient sharedClient];
     
     [self.view addSubview:self.tableView];
     [self.tableView autoPinEdgesToSuperviewEdges];
     
     [self addObserver];
-}
-
-- (void)addObserver{
-    __weak CWUploadController *weakSelf = self;
-    [self.KVOController observe:self.ftpClient
-                        keyPath:@"uploadCount"
-                        options:NSKeyValueObservingOptionNew
-                          block:^(CWUploadController *o, CWFTPClient *c, NSDictionary *change) {
-        _files = [c allUploadFiles];
-        [weakSelf.tableView reloadData];
-    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -181,7 +172,18 @@ CTAssetsPickerControllerDelegate>
     return 50.0f;
 }
 
-#pragma mark - 
+#pragma mark - KVO
+
+- (void)addObserver{
+    __weak CWUploadController *weakSelf = self;
+    [self.KVOController observe:self.ftpClient
+                        keyPath:@"uploadCount"
+                        options:NSKeyValueObservingOptionNew
+                          block:^(CWUploadController *o, CWFTPClient *c, NSDictionary *change) {
+                              _files = [c allUploadFiles];
+                              [weakSelf.tableView reloadData];
+                          }];
+}
 
 
 @end

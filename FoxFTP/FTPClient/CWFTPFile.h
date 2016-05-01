@@ -14,6 +14,9 @@ typedef enum {
     CWFTPFileTypeDirectory = 4
 }CWFTPFileType;
 
+/**
+ *  Model of FTP Files
+ */
 @interface CWFTPFile : NSObject<NSCoding>
 
 /**
@@ -50,6 +53,11 @@ typedef enum {
  */
 @property (nonatomic, assign) float progress;
 
+/**
+ *  Checks if a given file is directory or file
+ *
+ *  @return YES if file is a directory
+ */
 - (BOOL)isDirectory;
 
 

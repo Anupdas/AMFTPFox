@@ -49,6 +49,18 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD dismiss];
+    [self.ftpClient cancelDownloadRequest];
+}
+
 - (void)fetchResourceIfRequired{
     if ([self.ftpClient.fileManager localFileExistsAtPath:self.file.resourceName]) {
         [self loadResource];

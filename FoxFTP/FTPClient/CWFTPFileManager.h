@@ -10,6 +10,7 @@
 
 @class CWFTPFile;
 
+
 @interface CWFTPFileManager : NSObject
 
 /**

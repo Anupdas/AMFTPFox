@@ -7,18 +7,15 @@
 //
 
 #import "CWUploadTableViewCell.h"
+#import "CWFTPClient.h"
 #import "CWFTPFile.h"
-#import <KVOController/FBKVOController.h>
+#import <KVOController/NSObject+FBKVOController.h>
 
-NSString * kUploadFileName = @"kCFFTPResourceName";
+@interface CWUploadTableViewCell ()
 
-@interface CWUploadTableViewCell (){
-    FBKVOController *_KVOController;
-}
-
+@property (nonatomic, strong) UIButton *cancelButton;
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) UILabel *fileNameLabel;
-
 @property (nonatomic, assign) BOOL didLayoutConstraints;
 
 @end
@@ -34,8 +31,6 @@ NSString * kUploadFileName = @"kCFFTPResourceName";
         [self.contentView addSubview:self.progressView];
         [self.contentView addSubview:self.cancelButton];
         
-        // create KVO controller instance
-        _KVOController = [FBKVOController controllerWithObserver:self];
     }return self;
 }
 
@@ -67,9 +62,9 @@ NSString * kUploadFileName = @"kCFFTPResourceName";
     [self reloadData];
     
     __weak CWUploadTableViewCell *weakSelf = self;
-    [_KVOController observe:file keyPath:@"progress"
-                    options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
-                      block:^(CWUploadTableViewCell *cell, CWFTPFile *file, NSDictionary *change) {
+    [self.KVOController observe:file keyPath:@"progress"
+                        options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
+                          block:^(CWUploadTableViewCell *cell, CWFTPFile *file, NSDictionary *change) {
                           // update observer with new value
                           CGFloat progress = [change[NSKeyValueChangeNewKey] floatValue];
                           [weakSelf setProgress:progress];
@@ -95,6 +90,9 @@ NSString * kUploadFileName = @"kCFFTPResourceName";
         _cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
         _cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+        [_cancelButton addTarget:self
+                          action:@selector(cancelButtonClick:)
+                forControlEvents:UIControlEventTouchUpInside];
     }return _cancelButton;
 }
 
@@ -113,5 +111,10 @@ NSString * kUploadFileName = @"kCFFTPResourceName";
     }return _fileNameLabel;
 }
 
+#pragma mark - Button Click
+
+- (void)cancelButtonClick:(id)sender{
+    [[CWFTPClient sharedClient] cancelUploadFile:self.file];
+}
 
 @end

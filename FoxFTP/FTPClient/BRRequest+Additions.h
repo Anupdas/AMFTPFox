@@ -10,6 +10,9 @@
 
 @class CWFTPFile;
 
+/**
+ *  Category used to add properties to Request
+ */
 @interface BRRequest (Additions)
 
 @property NSInteger tag;

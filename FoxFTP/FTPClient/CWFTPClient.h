@@ -64,14 +64,8 @@ typedef void(^CWFTPProgressBlock)(float percentage);
  */
 - (NSArray *)allUploadFiles;
 
-/**
- *  All Files in current directory
- *
- *  @return CWFTPFile Instances
- */
-- (NSArray *)currentDirectoryFiles;
-
 #pragma mark - API Calls
+
 
 /**
  *  List directory contents at path. Only one list operation is possible at any time.
@@ -94,6 +88,8 @@ typedef void(^CWFTPProgressBlock)(float percentage);
 - (void)downloadFile:(NSString *)resourceName
             progress:(CWFTPProgressBlock)progressBlock
           completion:(CWFTPCompletionBlock)completionBlock;
+
+- (void)cancelDownloadRequest;
 
 /**
  *  Create directory
