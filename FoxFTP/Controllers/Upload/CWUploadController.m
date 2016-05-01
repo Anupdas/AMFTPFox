@@ -180,9 +180,15 @@ CTAssetsPickerControllerDelegate>
                         keyPath:@"uploadCount"
                         options:NSKeyValueObservingOptionNew
                           block:^(CWUploadController *o, CWFTPClient *c, NSDictionary *change) {
-                              _files = [c allUploadFiles];
-                              [weakSelf.tableView reloadData];
+                        [weakSelf performSelector:@selector(reloadTableView)
+                                             withObject:nil
+                                             afterDelay:1.0];
                           }];
+}
+
+- (void)reloadTableView{
+    self.files = [self.ftpClient allUploadFiles];
+    [self.tableView reloadData];
 }
 
 

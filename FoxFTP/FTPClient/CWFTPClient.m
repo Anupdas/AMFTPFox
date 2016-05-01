@@ -240,8 +240,8 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
     //FTP file should be set for upload to work, ftp file should have a non-nil resourceData
     request.ftpFile = file;
     request.tag = file.fileID;
-
-    //This will prevent dedundant download of this file
+    
+    //This will prevent unnecessary download of this file again
     [self.fileManager writeImageData:file.resourceData
                         resourceName:file.resourceName];
     
@@ -314,7 +314,6 @@ NSString *const kCWFTPClientSavedUser = @"FTPClientSavedUser";
                 self.downloadProgressBlock(request.percentCompleted);
             }
             break;
-
         }
         default:
             break;

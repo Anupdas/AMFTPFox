@@ -24,7 +24,7 @@
 
 - (void)layoutSubviews{
     if (!self.didLayoutConstraints) {
-        [self.addFileButton autoCenterInSuperview];
+        [self.addFileButton autoPinEdgesToSuperviewEdges];
         self.didLayoutConstraints = YES;
     }[super layoutSubviews];
 }

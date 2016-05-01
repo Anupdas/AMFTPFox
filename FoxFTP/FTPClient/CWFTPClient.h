@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "CWFTPCredential.h"
 #import "CWFTPFileManager.h"
+
 @class CWFTPFile;
 
 typedef void(^CWFTPCompletionBlock)(id response, NSError *error);
